@@ -30,7 +30,7 @@ if __name__ == '__main__':
     s = rh.HTMLSession()
     r = s.get("https://www.terraform.io/docs/providers/index.html")
     providers = r.html.find('.table a')
-    provider_pairs = [(p.absolute_links.pop(), p.text) for p in providers]
+    provider_pairs = [(p.absolute_links.pop(), p.text) for p in providers if p.absolute_links]
     for url, filename in provider_pairs:
         print(filename)
         generate_provider_pdf(url, filename, s=s)
