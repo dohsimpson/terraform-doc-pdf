@@ -29,8 +29,10 @@ def generate_provider_pdf(url, filename, s=None):
 if __name__ == '__main__':
     s = rh.HTMLSession()
     r = s.get("https://www.terraform.io/docs/providers/index.html")
-    providers = r.html.find('.table a')
+    providers = r.html.find('#inner a')
     provider_pairs = [(p.absolute_links.pop(), p.text) for p in providers if p.absolute_links]
     for url, filename in provider_pairs:
-        print(filename)
+        if not url.startswith('https://www.terraform.io/docs/providers/'):
+            continue
+        print(filename, url)
         generate_provider_pdf(url, filename, s=s)
