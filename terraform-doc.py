@@ -6,8 +6,8 @@ def generate_provider_pdf(url, filename, s=None):
     r1 = s.get(url)
 
     html = ""
-    anchors = r1.html.find('.nav-visible a')
-    links = [a.absolute_links.pop() for a in anchors]
+    anchors = r1.html.find('.nav a')
+    links = [a.absolute_links.pop() for a in anchors if a.absolute_links]
     links = filter(lambda href: href.find('/r/') != -1 or href.find('/d/') != -1, links) # filter out links not data or resource
 
     print("downloading...")
@@ -19,6 +19,8 @@ def generate_provider_pdf(url, filename, s=None):
         #     f.write(content.html)
         if div:
             html += div.html
+    with open("/tmp/{}.html".format(filename), "wt") as f:
+        f.write(html)
 
     print("generating pdf...")
     try:
