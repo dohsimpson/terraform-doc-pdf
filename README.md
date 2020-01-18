@@ -14,3 +14,7 @@
 1. Install the dependencies. Use `$ pipenv install` for installing python packages.
 2. `$ pipenv shell`
 3. `$ python terraform-doc.py`
+
+# Similar Project:
+
+* [Kubernetes PDF Documentation](https://github.com/dohsimpson/kubernetes-doc-pdf)
